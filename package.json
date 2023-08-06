@@ -1,11 +1,11 @@
 {
   "name": "parcel-project-template",
   "version": "2.0.0",
-  "description": "hw_8",
+  "description": "",
   "homepage": "https://Ferst1.github.io/goit-js-hw-08",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url/goit-js-hw-08/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
   "repository": {
     "type": "git",
