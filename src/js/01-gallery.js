@@ -1,56 +1,38 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 // Change code below this line
 
-// console.log(galleryItems);
+const galleryEl = document.querySelector('.gallery');
 
-const galleryElement = document.querySelector('.gallery');
-const galleryMarkup = createGalleryMarkup(galleryItems);
-
-galleryElement.insertAdjacentHTML('beforeend', galleryMarkup);
-
-function createGalleryMarkup(galleryItems) {
-  return galleryItems
-    .map(({ preview, original, description }) => {
-      return `
-    <li class="gallery__item">
-      <a class="gallery__link" href="${original}">
-        <img
-          class="gallery__image"
-          src= "${preview}"
-          data-source= "${original}"
-          alt="Image "${description}"
-        />
-      </a>
-    </li>
-    `;
-    })
+function createGalleryMarkup(items) {
+  return items
+    .map(
+      item =>
+        `<li class="gallery-item">
+        <a class="gallery__link" href="${item.original}">
+          <img
+            class="gallery__image"
+            src="${item.preview}"
+            data-source="${item.original}"
+            alt="${item.description}"
+          />
+        </a>
+      </li>`
+    )
     .join('');
 }
 
-galleryElement.addEventListener('click', onImageClick);
+const addGalleryMarkup = createGalleryMarkup(galleryItems);
 
-function onImageClick(event) {
-  if (!event.target.classList.contains('gallery__image')) {
-    return;
-  } else {
-    event.preventDefault();
-    const bigImageUrl = event.target.dataset.source;
-    const modal = basicLightbox.create(
-      `
-		<img width="1400" height="900" src="${bigImageUrl}">
-	`
-    );
-    modal.show();
+galleryEl.innerHTML = addGalleryMarkup;
 
-    document.addEventListener('keydown', onModalClose);
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-    function onModalClose(event) {
-      if (event.key === 'Escape') {
-        modal.close();
-        document.removeEventListener('keydown', onModalClose);
-      }
-    }
-  }
-}
+console.log(galleryItems);
