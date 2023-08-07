@@ -13,6 +13,6 @@ const handleTimeUpdate = throttle(event => {
 player.on('timeupdate', handleTimeUpdate);
 
 const savedTime = localStorage.getItem('videoplayer-current-time');
-if (savedTime !== null) {
+if (savedTime) {
   player.setCurrentTime(parseFloat(savedTime));
 }
