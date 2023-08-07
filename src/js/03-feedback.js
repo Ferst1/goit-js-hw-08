@@ -14,10 +14,22 @@ function onFormData(e) {
 }
 
 function onSubmitForm(e) {
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  const { email, message } = form.elements;
+
+  // Перевірка на заповненість полів
+  if (!email.value || !message.value) {
+    alert('Будь ласка, заповніть усі поля форми.');
+    return;
+  }
+
+  // Вивід даних у консоль
+  console.log(formData);
+
+  // Очищення даних з форми та localStorage
   e.preventDefault();
-  e.currentTarget.reset();
+  form.reset();
   localStorage.removeItem('feedback-form-state');
+  formData = {}; // Очищення об'єкта formData
 }
 
 (function dataFromLocalStorage() {
