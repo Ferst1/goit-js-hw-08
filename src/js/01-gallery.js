@@ -35,4 +35,6 @@ new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
+galleryEl.style.listStyle = 'none';
+
 console.log(galleryItems);
