@@ -6,7 +6,7 @@ form.addEventListener('input', throttle(onFormData, 500));
 
 form.addEventListener('submit', onSubmitForm);
 
-const formData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
+let formData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
 
 function onFormData(e) {
   formData[e.target.name] = e.target.value;
@@ -22,7 +22,6 @@ function onSubmitForm(e) {
     return;
   }
 
-  // Вивід даних у консоль
   console.log(formData);
 
   // Очищення даних з форми та localStorage
